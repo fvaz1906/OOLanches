@@ -1,0 +1,23 @@
+@OOLanches.API_HostAddress = http://localhost:5033
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqb2FvLnNpbHZhQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM2NjQ3ODE5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDY2LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwNjYvIn0.HG1kFupNruR0ygqVizzx5fXYB605ZdIw6I2nbhWDnDM
+
+### GET: Detalhes do Pedido
+GET {{OOLanches.API_HostAddress}}/api/Pedidos/DetalhesPedido/1
+Authorization: Bearer {{Token}}
+Accept: application/json
+
+### GET: Pedidos por Usuário
+GET {{OOLanches.API_HostAddress}}/api/Pedidos/PedidosPorUsuario/1
+Authorization: Bearer {{Token}}
+Accept: application/json
+
+### POST: Criar Pedido
+POST {{OOLanches.API_HostAddress}}/api/Pedidos
+Authorization: Bearer {{Token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "usuarioId": 1,
+  "valorTotal": 200.5
+}

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOLanches.API", "OOLanches.API\OOLanches.API.csproj", "{46867816-1485-4F71-BC51-99C9DD4B22D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOLanches.Core", "OOLanches.Core\OOLanches.Core.csproj", "{E9355A8E-B394-4B2B-986A-53640972067F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOLanches.Http", "OOLanches.Http\OOLanches.Http.csproj", "{8D6683BA-6329-466D-B679-BB15553932DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46867816-1485-4F71-BC51-99C9DD4B22D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46867816-1485-4F71-BC51-99C9DD4B22D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46867816-1485-4F71-BC51-99C9DD4B22D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46867816-1485-4F71-BC51-99C9DD4B22D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9355A8E-B394-4B2B-986A-53640972067F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9355A8E-B394-4B2B-986A-53640972067F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9355A8E-B394-4B2B-986A-53640972067F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9355A8E-B394-4B2B-986A-53640972067F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D6683BA-6329-466D-B679-BB15553932DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6683BA-6329-466D-B679-BB15553932DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6683BA-6329-466D-B679-BB15553932DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6683BA-6329-466D-B679-BB15553932DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

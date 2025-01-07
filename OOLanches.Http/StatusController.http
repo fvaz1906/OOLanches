@@ -1,0 +1,6 @@
+@OOLanches.API_HostAddress = http://localhost:5033
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqb2FvLnNpbHZhQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM2NjQ3ODE5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDY2LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwNjYvIn0.HG1kFupNruR0ygqVizzx5fXYB605ZdIw6I2nbhWDnDM
+
+### GET: Verificar Status da API
+GET {{OOLanches.API_HostAddress}}/api/status
+Accept: application/json
