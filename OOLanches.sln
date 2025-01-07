@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOLanches.APP", "OOLanches.APP\OOLanches.APP.csproj", "{159F6D6C-2E01-4B8F-8B3E-E96B22F9F301}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,12 @@ Global
 		{8D6683BA-6329-466D-B679-BB15553932DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D6683BA-6329-466D-B679-BB15553932DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D6683BA-6329-466D-B679-BB15553932DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{159F6D6C-2E01-4B8F-8B3E-E96B22F9F301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{159F6D6C-2E01-4B8F-8B3E-E96B22F9F301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{159F6D6C-2E01-4B8F-8B3E-E96B22F9F301}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{159F6D6C-2E01-4B8F-8B3E-E96B22F9F301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{159F6D6C-2E01-4B8F-8B3E-E96B22F9F301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{159F6D6C-2E01-4B8F-8B3E-E96B22F9F301}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
