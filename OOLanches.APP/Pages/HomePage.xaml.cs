@@ -26,15 +26,10 @@ public partial class HomePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        try
+        if (!_isDataLoaded)
         {
-            await GetListaCategorias();
-            await GetMaisVendidos();
-            await GetPopulares();
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Erro", $"Erro ao carregar a página: {ex.Message}", "OK");
+            await LoadDataAsync();
+            _isDataLoaded = true;
         }
     }
 
@@ -57,11 +52,11 @@ public partial class HomePage : ContentPage
 
             if (categorias == null)
             {
-                await DisplayAlert("Erro", errorMessage ?? "Não foi possível obter as categorias.", "OK");
+                await DisplayAlert("Erro", errorMessage ?? "N o foi poss vel obter as categorias.", "OK");
                 return Enumerable.Empty<Categoria>();
             }
 
-            cvCategorias.ItemsSource = categorias;
+            CvCategorias.ItemsSource = categorias;
             return categorias;
         }
         catch (Exception ex)
@@ -85,7 +80,7 @@ public partial class HomePage : ContentPage
 
             if (produtos == null)
             {
-                await DisplayAlert("Erro", errorMessage ?? "Não foi possível obter as categorias.", "OK");
+                await DisplayAlert("Erro", errorMessage ?? "N o foi poss vel obter as categorias.", "OK");
                 return Enumerable.Empty<Produto>();
             }
 
@@ -98,8 +93,6 @@ public partial class HomePage : ContentPage
             return Enumerable.Empty<Produto>();
         }
     }
-
-    //-----------------
 
     private async Task<IEnumerable<Produto>> GetPopulares()
     {
@@ -115,7 +108,7 @@ public partial class HomePage : ContentPage
 
             if (produtos == null)
             {
-                await DisplayAlert("Erro", errorMessage ?? "Não foi possível obter as categorias.", "OK");
+                await DisplayAlert("Erro", errorMessage ?? "N o foi poss vel obter as categorias.", "OK");
                 return Enumerable.Empty<Produto>();
             }
             CvPopulares.ItemsSource = produtos;
@@ -127,8 +120,6 @@ public partial class HomePage : ContentPage
             return Enumerable.Empty<Produto>();
         }
     }
-
-    //-------------------
 
     private async Task DisplayLoginPage()
     {
@@ -165,6 +156,15 @@ public partial class HomePage : ContentPage
         {
             NavigateToProdutoDetalhesPage(collectionView, e);
         }
+    }
+
+    private async Task LoadDataAsync()
+    {
+        var categoriasTask = GetListaCategorias();
+        var maisVendidosTask = GetMaisVendidos();
+        var popularesTask = GetPopulares();
+
+        await Task.WhenAll(categoriasTask, maisVendidosTask, popularesTask);
     }
 
     private void NavigateToProdutoDetalhesPage(CollectionView collectionView, SelectionChangedEventArgs e)

@@ -12,6 +12,10 @@ public partial class ProdutoDetalhesPage : ContentPage
     private int _produtoId;
     private bool _loginPageDisplayed = false;
 
+    private FavoritosService _favoritosService = new FavoritosService();
+
+    private string? _imagemUrl;
+
     public ProdutoDetalhesPage(int produtoId,
                                 string produtoNome,
                                 ApiService apiService,
@@ -29,6 +33,7 @@ public partial class ProdutoDetalhesPage : ContentPage
     {
         base.OnAppearing();
         await GetProdutoDetalhes(_produtoId);
+        AtualizaFavoritoButton();
     }
 
     private async Task<Produto?> GetProdutoDetalhes(int produtoId)
@@ -57,10 +62,11 @@ public partial class ProdutoDetalhesPage : ContentPage
             LblProdutoPreco.Text = produtoDetalhe.Preco.ToString();
             LblProdutoDescricao.Text = produtoDetalhe.Detalhe;
             LblPrecoTotal.Text = produtoDetalhe.Preco.ToString();
+            _imagemUrl = produtoDetalhe.CaminhoImagem;
         }
         else
         {
-            await DisplayAlert("Erro", errorMessage ?? "Não foi possível obter os detalhes do produto.", "OK");
+            await DisplayAlert("Erro", errorMessage ?? "N o foi poss vel obter os detalhes do produto.", "OK");
             return null;
         }
         return produtoDetalhe;
@@ -96,7 +102,36 @@ public partial class ProdutoDetalhesPage : ContentPage
         }
     }
 
-    private void ImagemBtnFavorito_Clicked(object sender, EventArgs e) { }
+    private async void ImagemBtnFavorito_Clicked(object sender, EventArgs e) 
+    {
+        try
+        {
+            var existeFavorito = await _favoritosService.ReadAsync(_produtoId);
+            if (existeFavorito is not null)
+            {
+                await _favoritosService.DeleteAsync(existeFavorito);
+            }
+            else
+            {
+                var produtoFavorito = new ProdutoFavorito()
+                {
+                    ProdutoId = _produtoId,
+                    IsFavorito = true,
+                    Detalhe = LblProdutoDescricao.Text,
+                    Nome = LblProdutoNome.Text,
+                    Preco = Convert.ToDecimal(LblProdutoPreco.Text),
+                    ImagemUrl = _imagemUrl
+                };
+
+                await _favoritosService.CreateAsync(produtoFavorito);
+            }
+            AtualizaFavoritoButton();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Ocorreu um erro: {ex.Message}", "OK");
+        }
+    }
 
     private void BtnAdiciona_Clicked(object sender, EventArgs e)
     {
@@ -136,6 +171,17 @@ public partial class ProdutoDetalhesPage : ContentPage
             // Tratar caso as convers es falhem
             DisplayAlert("Erro", "Valores inv lidos", "OK");
         }
+    }
+
+    private async void AtualizaFavoritoButton()
+    {
+        var existeFavorito = await
+               _favoritosService.ReadAsync(_produtoId);
+
+        if (existeFavorito is not null)
+            ImagemBtnFavorito.Source = "heartfill";
+        else
+            ImagemBtnFavorito.Source = "heart";
     }
 
     private async Task DisplayLoginPage()

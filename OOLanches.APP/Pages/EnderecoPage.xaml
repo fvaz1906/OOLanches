@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OOLanches.APP.Pages.EnderecoPage"
-             Title="EnderecoPage">
+             Title="Endereço">
     <VerticalStackLayout Margin="20" Spacing="10" VerticalOptions="Start">
 
         <Label Text="Endereço de entrega" HorizontalOptions="Center" FontSize="Large" />

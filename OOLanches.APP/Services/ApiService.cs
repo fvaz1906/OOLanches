@@ -167,6 +167,74 @@ namespace OOLanches.APP.Services
             }
         }
 
+        public async Task<ApiResponse<bool>> ConfirmarPedido(Pedido pedido)
+        {
+            try
+            {
+                var json = JsonSerializer.Serialize(pedido, _serializerOptions);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await PostRequest("api/Pedidos", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    string errorMessage = response.StatusCode == HttpStatusCode.Unauthorized
+                        ? "Unauthorized"
+                        : $"Erro ao enviar requisição HTTP: {response.StatusCode}";
+
+                    _logger.LogError($"Erro ao enviar requisição HTTP: {response.StatusCode}");
+                    return new ApiResponse<bool> { ErrorMessage = errorMessage };
+                }
+                return new ApiResponse<bool> { Data = true };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erro ao confirmar pedido: {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
+            }
+        }
+
+        public async Task<ApiResponse<bool>> UploadImagemUsuario(byte[] imageArray)
+        {
+            try
+            {
+                var content = new MultipartFormDataContent();
+                content.Add(new ByteArrayContent(imageArray), "imagem", "image.jpg");
+                var response = await PostRequest("api/usuarios/uploadfotousuario", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    string errorMessage = response.StatusCode == HttpStatusCode.Unauthorized
+                      ? "Unauthorized"
+                      : $"Erro ao enviar requisição HTTP: {response.StatusCode}";
+
+                    _logger.LogError($"Erro ao enviar requisição HTTP: {response.StatusCode}");
+                    return new ApiResponse<bool> { ErrorMessage = errorMessage };
+                }
+                return new ApiResponse<bool> { Data = true };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erro ao fazer upload da imagem do usuário: {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
+            }
+        }
+
+        public async Task<(List<PedidoPorUsuario>?, string? ErrorMessage)> GetPedidosPorUsuario(int usuarioId)
+        {
+
+            string endpoint = $"api/pedidos/PedidosPorUsuario/{usuarioId}";
+
+            return await GetAsync<List<PedidoPorUsuario>>(endpoint);
+        }
+
+        public async Task<(List<PedidoDetalhe>?, string? ErrorMessage)> GetPedidoDetalhes(int pedidoId)
+        {
+            string endpoint = $"api/pedidos/DetalhesPedido/{pedidoId}";
+
+            return await GetAsync<List<PedidoDetalhe>>(endpoint);
+        }
+
         public async Task<(List<Categoria>? Categorias, string? ErrorMessage)> GetCategorias()
         {
             return await GetAsync<List<Categoria>>("api/categorias");
@@ -188,6 +256,12 @@ namespace OOLanches.APP.Services
         {
             var endpoint = $"api/ItensCarrinhoCompra/{usuarioId}";
             return await GetAsync<List<CarrinhoCompraItem>>(endpoint);
+        }
+
+        public async Task<(ImagemPerfil? ImagemPerfil, string? ErrorMessage)> GetImagemPerfilUsuario()
+        {
+            string endpoint = "api/usuarios/ImagemPerfilUsuario";
+            return await GetAsync<ImagemPerfil>(endpoint);
         }
 
         private async Task<(T? Data, string? ErrorMessage)> GetAsync<T>(string endpoint)
